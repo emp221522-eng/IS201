@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="../css/scratchstyles.css">
+</head>
+
+<body>
+
+  <div class="game-container">
+    <h1>🍬 Number Guessing Game 🍬</h1>
+    <p class="subtitle">Guess the secret number between 1 and 50</p>
+
+    <input type="number" id="guess" placeholder="Enter your guess...">
+    <button onclick="checkGuess()">Guess</button>
+
+    <p id="result"></p>
+  </div>
+
+  <!-- 🎉 Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+let number = Math.floor(Math.random() * 50) + 1;
+
+function checkGuess() {
+  let guess = parseInt(document.getElementById("guess").value);
+
+  if (isNaN(guess)) {
+    document.getElementById("result").innerText = "Please enter a number between 1 and 50";
+    return;
+  }
+
+  if (guess === number) {
+    document.getElementById("result").innerText = "Correct!";
+
+    // 🎉 Confetti burst!
+    confetti({
+      particleCount: 150,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+
+  } else if (guess > number) {
+    document.getElementById("result").innerText = "Too high";
+  } else {
+    document.getElementById("result").innerText = "Too low";
+  }
+}
+</script>
+
+</body>
+</html>
